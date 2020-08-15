@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import axios from 'axios'
 import 'semantic-ui-css/semantic.min.css'
 import './App.css';
+console.log(axios.defaults)
 
 function App() {
   const [users, setUsers] = useState(null)
@@ -34,7 +35,7 @@ function App() {
     // }
     axios
       .post("/api/users", {
-        username: username,
+        name: username,
         email: email,
         phone: phone
       })
@@ -72,34 +73,33 @@ function App() {
               <Table.Body>
                 { users.length > 0 ? users.map(user => {
                   return(<Table.Row>
-                     <Table.Cell> {user.username} </Table.Cell>
+                     <Table.Cell> {user.name} </Table.Cell>
                      <Table.Cell> {user.email} </Table.Cell>
                      <Table.Cell> {user.phone} </Table.Cell>
 
 
                   </Table.Row>)
-                }) : <></> }
+                }) : <> </> }
               </Table.Body>
               </Table>
           </React.Fragment>)
 
 
         }
-        <Form onSubmit={submitForm()}>
+        <Form >
           <Form.Field>
-            <Form.Input label='Enter Name' type='text' />
+            <Form.Input label='Enter Name' type='text' onChange={userNameEntry}/>
 
           </Form.Field>
           <Form.Field>
-            <Form.Input label='Enter Email' type='text' />
+            <Form.Input label='Enter Email' onChange={emailEntry} type='text' />
 
           </Form.Field>
           <Form.Field>
-            <Form.Input label='Enter Phone' type='text' />
-
+            <Form.Input label='Enter Phone' onChange={phoneNumberEntry} type='text' />
           </Form.Field>
 
-          <Form.Button> Submit </Form.Button>
+          <Form.Button onClick={submitForm}> Submit </Form.Button>
 
         </Form>
 

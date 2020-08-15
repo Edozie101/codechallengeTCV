@@ -22,21 +22,26 @@ function App() {
   const userNameEntry = (e) => {
     setUserName(e.target.value)
   }
-  useEffect(() => {
-    axios
-      .get("/api/users")
-      .then((users) => setUsers(users.data))
-      .catch((err) => console.log(err));
-  
+  useEffect(async () => {
+    const result = await axios('/api/users',)
+    setUsers(result.data)
   
       console.log(users)
 
     }, []);
 
   function submitForm() {
-    // if (username || email || phone === "") {
-    //   alert("Fill all required fields")
-    // }
+    if (username  === "") {
+      alert("Please fill username field")
+    }
+    if (phone  === "") {
+      alert("Please fill phone  field")
+    }
+    if (email  === "") {
+      alert("Please fill email field")
+
+    }
+    
     axios
       .post("/api/users", {
         name: username,

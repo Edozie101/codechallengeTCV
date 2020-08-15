@@ -13,10 +13,11 @@ app.use(bodyParser.json())
 app.use(cors())
 
 const users = require('api/users')
-const notes = require('api/notes')
-const appointments = require('api/appointments')
 
-//will add other api functions soon
+// will add other api functions if I have time
+// const notes = require('api/notes')
+// const appointments = require('api/appointments')
+
 app.use('/api/users', users);
 app.use(express.static(path.join(__dirname, '../build')))
 

@@ -25,9 +25,13 @@ function App() {
   useEffect(() => {
     axios
       .get("/api/users")
-      .then((users) => setUsers(users))
+      .then((users) => setUsers(users.data))
       .catch((err) => console.log(err));
-  }, []);
+  
+  
+      console.log(users)
+
+    }, []);
 
   function submitForm() {
     // if (username || email || phone === "") {
@@ -59,8 +63,8 @@ function App() {
         </Header>
 
         { 
-          (users === null) ? (<p> Loading </p>)
-          : (users.length === 0) ? (<p> No users available</p>) :
+          (users === null) ? (<h1> Loading </h1>)
+          : (users.length === 0) ? (<h1> No users available</h1>) :
           (<React.Fragment>
             <Table >
               <Table.Header>
@@ -71,15 +75,15 @@ function App() {
                 </Table.Row>
               </Table.Header>
               <Table.Body>
-                { users.length > 0 ? users.map(user => {
-                  return(<Table.Row>
+                { users.length > 0 ? users.map( (user) => 
+                  (<Table.Row>
                      <Table.Cell> {user.name} </Table.Cell>
                      <Table.Cell> {user.email} </Table.Cell>
                      <Table.Cell> {user.phone} </Table.Cell>
 
 
                   </Table.Row>)
-                }) : <> </> }
+                ) : <> </> }
               </Table.Body>
               </Table>
           </React.Fragment>)

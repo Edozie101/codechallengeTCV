@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Header,Icon, Form, Table } from 'semantic-ui-react'
+import { Button4, Header,Icon, Form, Table, Segment } from 'semantic-ui-react'
 import logo from './logo.svg';
+import {addUser} from './services/userService'
 import axios from 'axios'
 import 'semantic-ui-css/semantic.min.css'
 import './App.css';
@@ -31,46 +32,23 @@ function App() {
     }, []);
 
   function submitForm() {
-    if (username  === "") {
-      alert("Please fill username field")
-    }
-    if (phone  === "") {
-      alert("Please fill phone  field")
-    }
-    if (email  === "") {
-      alert("Please fill email field")
-
-    }
-    
-    axios
-      .post("/api/users", {
-        name: username,
-        email: email,
-        phone: phone
-      })
-      .then(function () {
-        alert("User successfully added");
-        window.location.reload()
-      })
-      .catch(function (e) {
-          console.log(e)
-      })
+     addUser(username,email,phone)
   }
   return (
     <div className="App">
       <header className="App-header">
         <Header as='h2' icon>
-          <Icon name='settings' />
-            Admin
-    <Header.Subheader>
-            Manage your current users
-    </Header.Subheader>
+            <Icon name='settings' />
+              Admin
+          <Header.Subheader>
+              Manage your current users
+          </Header.Subheader>
         </Header>
 
         { 
           (users === null) ? (<h1> Loading </h1>)
           : (users.length === 0) ? (<h1> No users available</h1>) :
-          (<React.Fragment>
+          (<Segment>
             <Table >
               <Table.Header>
                 <Table.Row>
@@ -91,7 +69,7 @@ function App() {
                 ) : <> </> }
               </Table.Body>
               </Table>
-          </React.Fragment>)
+          </Segment>)
 
 
         }
